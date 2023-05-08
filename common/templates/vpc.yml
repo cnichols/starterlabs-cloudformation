@@ -1,0 +1,105 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: VPC with public and private subnets
+
+Parameters:
+  VPCName:
+    Description: Name of the VPC
+    Type: String
+  VPCcidr:
+    Description: CIDR block for the VPC
+    Type: String
+  PublicSubnet1Cidr:
+    Description: CIDR block for the first public subnet
+    Type: String
+  PublicSubnet2Cidr:
+    Description: CIDR block for the second public subnet
+    Type: String
+  PrivateSubnet1Cidr:
+    Description: CIDR block for the first private subnet
+    Type: String
+  PrivateSubnet2Cidr:
+    Description: CIDR block for the second private subnet
+    Type: String
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VPCcidr
+      Tags:
+        - Key: Name
+          Value: !Ref VPCName
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: f9d6b9bc-9ac9-4e20-8d96-4b4e4a4a274a
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      CidrBlock: !Ref PublicSubnet1Cidr
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub '${VPCName}-public-1'
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs '' ]
+      CidrBlock: !Ref PublicSubnet2Cidr
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub '${VPCName}-public-2'
+
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      CidrBlock: !Ref PrivateSubnet1Cidr
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub '${VPCName}-private-1'
+
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs '' ]
+      CidrBlock: !Ref PrivateSubnet2Cidr
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub '${VPCName}-private-2'
+
+Outputs:
+  VPCID:
+    Description: VPC ID
+    Value: !Ref VPC
+    Export:
+      Name: VPCID
+
+  PublicSubnet1ID:
+    Description: ID of the first public subnet
+    Value: !Ref PublicSubnet1
+    Export:
+      Name: PublicSubnet1ID
+
+  PublicSubnet2ID:
+    Description: ID of the second public subnet
+    Value: !Ref PublicSubnet2
+    Export:
+      Name: PublicSubnet2ID
+
+  PrivateSubnet1ID:
+    Description: ID of the first private subnet
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: PrivateSubnet1ID
+
+  PrivateSubnet2ID:
+    Description: ID of the second private subnet
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: PrivateSubnet2ID

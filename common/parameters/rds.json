@@ -1,0 +1,38 @@
+[
+  {
+    "ParameterKey": "DBInstanceIdentifier",
+    "ParameterValue": "MyDBInstance"
+  },
+  {
+    "ParameterKey": "DBName",
+    "ParameterValue": "MyDatabase"
+  },
+  {
+    "ParameterKey": "DBUser",
+    "ParameterValue": "dbuser"
+  },
+  {
+    "ParameterKey": "DBPassword",
+    "ParameterValue": "YourSecurePassword"
+  },
+  {
+    "ParameterKey": "DBInstanceClass",
+    "ParameterValue": "db.t2.micro"
+  },
+  {
+    "ParameterKey": "AllocatedStorage",
+    "ParameterValue": "20"
+  },
+  {
+    "ParameterKey": "VPCID",
+    "ParameterValue": "<VPC_ID>"
+  },
+  {
+    "ParameterKey": "PrivateSubnet1ID",
+    "ParameterValue": "<PRIVATE_SUBNET1_ID>"
+  },
+  {
+    "ParameterKey": "PrivateSubnet2ID",
+    "ParameterValue": "<PRIVATE_SUBNET2_ID>"
+  }
+]
